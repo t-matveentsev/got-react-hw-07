@@ -16,7 +16,6 @@ const ContactForm = () => {
 
   const onSubmit = (values, options, action) => {
     const newContact = {
-      id: crypto.randomUUID(),
       name: values.name,
       number: values.number,
     };

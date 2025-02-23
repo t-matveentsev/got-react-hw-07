@@ -3,14 +3,16 @@ import { addContact, deleteContact, fetchData } from "./contactsOps";
 import { selectNameFilter } from "./filtersSlice";
 
 const initialState = {
-  contact: [],
-  loading: false,
-  error: null,
+  contact: {
+    item: [],
+    loading: false,
+    error: null,
+  },
 };
 
-export const selectContacts = (state) => state.contacts.contact;
-export const selectLoading = (state) => state.contacts.loading;
-export const selectError = (state) => state.contacts.error;
+export const selectContacts = (state) => state.contacts.contact.item;
+export const selectLoading = (state) => state.contacts.contact.loading;
+export const selectError = (state) => state.contacts.contact.error;
 
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter],
@@ -28,21 +30,21 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.fulfilled, (state, action) => {
-        state.contact = action.payload;
-        state.loading = false;
+        state.contact.item = action.payload;
+        state.contact.loading = false;
       })
       .addCase(fetchData.pending, (state) => {
-        state.loading = true;
+        state.contact.loading = true;
       })
       .addCase(fetchData.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+        state.contact.loading = false;
+        state.contact.error = action.payload;
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.contact.push(action.payload);
+        state.contact.item.push(action.payload);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.contact = state.contact.filter(
+        state.contact.item = state.contact.item.filter(
           (item) => item.id !== action.payload
         );
       });
