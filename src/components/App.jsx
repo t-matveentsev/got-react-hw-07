@@ -13,7 +13,7 @@ export default function App() {
   }, [dispatch]);
   return (
     <section className={s.wrapper}>
-      <h1>Phone book</h1>
+      <h1>Phone Book</h1>
       <ContactForm />
       <SearchBox />
       <ContactList />

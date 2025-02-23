@@ -21,6 +21,7 @@
 .itemBtn {
   padding: 5px 10px;
   color: #121212;
+  background-color: #d3d3d3;
   border: none;
   border-radius: 4px;
   cursor: pointer;
